@@ -13,7 +13,6 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - @IBOutlet properties
     
-    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var profileAvatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -23,7 +22,8 @@ final class ProfileViewController: UIViewController {
     @IBAction func didTapLogoutButton(_ sender: Any) {
     }
     
-    
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
