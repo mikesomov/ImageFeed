@@ -23,7 +23,7 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="muf-jh-fAW"/>
+                        <segue destination="S9V-yh-giw" kind="relationship" relationship="viewControllers" id="muf-jh-fAW"/>
                         <segue destination="z8g-0i-UNb" kind="relationship" relationship="viewControllers" id="7ch-lR-buh"/>
                     </connections>
                 </tabBarController>
@@ -93,6 +93,7 @@
                                             <outlet property="cellImage" destination="3K1-Ui-fbC" id="0Xa-Mj-Zui"/>
                                             <outlet property="dateLabel" destination="Mi5-cr-5U5" id="s0V-id-z77"/>
                                             <outlet property="likeButton" destination="MZo-Bf-xXo" id="qJh-aL-XQk"/>
+                                            <segue destination="BYk-Fo-HJm" kind="show" id="5ou-kt-O7Z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -103,7 +104,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="YP Background"/>
+                        <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="Y9R-Pr-ekP" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="2Zf-LU-p5R"/>
                             <constraint firstItem="Y9R-Pr-ekP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KsW-9P-0Bs"/>
@@ -111,14 +112,14 @@
                             <constraint firstAttribute="bottom" secondItem="Y9R-Pr-ekP" secondAttribute="bottom" id="v5M-qC-gU8"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="main_active" id="GlB-rW-PnN"/>
+                    <navigationItem key="navigationItem" id="67Z-SQ-nUJ"/>
                     <connections>
                         <outlet property="tableView" destination="Y9R-Pr-ekP" id="g0R-wc-3GL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
         </scene>
         <!--ProfileViewController-->
         <scene sceneID="uMv-sd-NCb">
@@ -194,7 +195,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljX-Af-dLe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="930.53435114503816" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="1857.2519083969464" y="-35.211267605633807"/>
+        </scene>
+        <!--Single Image View Controller-->
+        <scene sceneID="Jvo-oR-f40">
+            <objects>
+                <viewController id="BYk-Fo-HJm" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nuK-w2-72M">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="T0X-jL-WYy">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" name="YP Black"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ujl-Gf-7BT"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="T0X-jL-WYy" firstAttribute="topMargin" secondItem="ujl-Gf-7BT" secondAttribute="top" constant="8" id="36P-kP-tI5"/>
+                            <constraint firstItem="T0X-jL-WYy" firstAttribute="leading" secondItem="ujl-Gf-7BT" secondAttribute="leading" id="92x-83-XZS"/>
+                            <constraint firstItem="ujl-Gf-7BT" firstAttribute="bottom" secondItem="T0X-jL-WYy" secondAttribute="bottomMargin" constant="8" id="UNb-Kf-BqD"/>
+                            <constraint firstItem="ujl-Gf-7BT" firstAttribute="trailing" secondItem="T0X-jL-WYy" secondAttribute="trailing" id="vqb-Mp-A5U"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GZy-MZ-5xe"/>
+                    <connections>
+                        <outlet property="imageView" destination="T0X-jL-WYy" id="YcG-OZ-vG8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIH-x6-hP7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2632.8244274809158" y="-35.211267605633807"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6E9-qj-aRT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S9V-yh-giw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="main_active" id="GlB-rW-PnN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oXx-Hc-0he">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <color key="tintColor" name="YP White"/>
+                        <color key="barTintColor" name="YP White"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="YP Black"/>
+                        </navigationBarAppearance>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0Ld-qC-5Wu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Fm-jb-uIq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>
@@ -204,11 +261,8 @@
         <image name="like_button_on" width="42" height="42"/>
         <image name="main_active" width="30" height="30"/>
         <image name="profile_not_active" width="30" height="30"/>
-        <namedColor name="YP Background">
-            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="YP Black">
-            <color red="0.10196078431372549" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP Gray">
             <color red="0.68199998140335083" green="0.68599998950958252" blue="0.70599997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
