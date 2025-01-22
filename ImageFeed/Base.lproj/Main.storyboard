@@ -93,7 +93,6 @@
                                             <outlet property="cellImage" destination="3K1-Ui-fbC" id="0Xa-Mj-Zui"/>
                                             <outlet property="dateLabel" destination="Mi5-cr-5U5" id="s0V-id-z77"/>
                                             <outlet property="likeButton" destination="MZo-Bf-xXo" id="qJh-aL-XQk"/>
-                                            <segue destination="BYk-Fo-HJm" kind="show" id="5ou-kt-O7Z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -115,11 +114,12 @@
                     <navigationItem key="navigationItem" id="67Z-SQ-nUJ"/>
                     <connections>
                         <outlet property="tableView" destination="Y9R-Pr-ekP" id="g0R-wc-3GL"/>
+                        <segue destination="BYk-Fo-HJm" kind="show" identifier="ShowSingleImage" id="s5c-Ic-fWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="184" y="699"/>
         </scene>
         <!--ProfileViewController-->
         <scene sceneID="uMv-sd-NCb">
@@ -195,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ljX-Af-dLe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857.2519083969464" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="1036" y="-35"/>
         </scene>
         <!--Single Image View Controller-->
         <scene sceneID="Jvo-oR-f40">
@@ -226,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIH-x6-hP7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2632.8244274809158" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="1036" y="699"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6E9-qj-aRT">
@@ -251,7 +251,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fm-jb-uIq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="184" y="-35"/>
         </scene>
     </scenes>
     <resources>
