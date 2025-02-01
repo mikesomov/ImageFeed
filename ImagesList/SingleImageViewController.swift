@@ -24,13 +24,21 @@ class SingleImageViewController: UIViewController {
     // MARK: - @IBOutlet properties
 
     @IBAction func didTapShareButton(_ sender: UIButton) {
-        guard let image else { return }
-        let share = UIActivityViewController(
-            activityItems: [image],
-            applicationActivities: nil
-        )
-        present(share, animated: true, completion: nil)
+        guard let image = image else { return }
+                let activityItems: [Any] = [image]
+                let activityViewController = UIActivityViewController(
+                    activityItems: activityItems,
+                    applicationActivities: nil
+                )
+                                
+                if let popoverController = activityViewController.popoverPresentationController {
+                    popoverController.sourceView = sender
+                    popoverController.sourceRect = sender.bounds
+                }
+                
+                present(activityViewController, animated: true, completion: nil)
     }
+    
     @IBAction func didTouchBackwardButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
