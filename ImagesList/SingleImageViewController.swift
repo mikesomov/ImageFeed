@@ -5,13 +5,12 @@
 //  Created by Mike Somov on 16.01.2025.
 //
 
-import Foundation
 import UIKit
 
-class SingleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController {
     
     // MARK: - Vars
-
+    
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
@@ -22,24 +21,24 @@ class SingleImageViewController: UIViewController {
     }
     
     // MARK: - @IBOutlet properties
-
-    @IBAction func didTapShareButton(_ sender: UIButton) {
+    
+    @IBAction private func didTapShareButton(_ sender: UIButton) {
         guard let image = image else { return }
-                let activityItems: [Any] = [image]
-                let activityViewController = UIActivityViewController(
-                    activityItems: activityItems,
-                    applicationActivities: nil
-                )
-                                
-                if let popoverController = activityViewController.popoverPresentationController {
-                    popoverController.sourceView = sender
-                    popoverController.sourceRect = sender.bounds
-                }
-                
-                present(activityViewController, animated: true, completion: nil)
+        let activityItems: [Any] = [image]
+        let activityViewController = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil
+        )
+        
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = sender.bounds
+        }
+        
+        present(activityViewController, animated: true, completion: nil)
     }
     
-    @IBAction func didTouchBackwardButton(_ sender: Any) {
+    @IBAction private func didTouchBackwardButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -47,7 +46,7 @@ class SingleImageViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.minimumZoomScale = 0.1

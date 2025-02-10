@@ -5,7 +5,6 @@
 //  Created by Mike Somov on 29.12.2024.
 //
 
-import Foundation
 import UIKit
 
 
@@ -34,14 +33,14 @@ final class ProfileViewController: UIViewController {
         nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8).isActive = true
         
-        let logingNameLabel = UILabel()
-        logingNameLabel.text = "@ekaterina_nov"
-        logingNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        logingNameLabel.textColor = UIColor(named: "YP Gray")
-        logingNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logingNameLabel)
-        logingNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        logingNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
+        let loginNameLabel = UILabel()
+        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        loginNameLabel.textColor = UIColor(named: "YP Gray")
+        loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loginNameLabel)
+        loginNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
         
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Hello, world!"
@@ -50,7 +49,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
         descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: logingNameLabel.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8).isActive = true
         
         let logoutButton = UIButton()
         logoutButton.setImage(UIImage(named: "logout"), for: .normal)
