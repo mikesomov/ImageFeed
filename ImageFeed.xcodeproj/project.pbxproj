@@ -39,6 +39,11 @@
 			path = ImagesList;
 			sourceTree = "<group>";
 		};
+		7CE1A5492D5E5D8700DB4E51 /* Auth */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Auth;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +60,7 @@
 		7CC97F352D19F9920008F11C = {
 			isa = PBXGroup;
 			children = (
+				7CE1A5492D5E5D8700DB4E51 /* Auth */,
 				7CC97F402D19F9920008F11C /* ImageFeed */,
 				7C4054062D21955B00F772BB /* Profile */,
 				7CC980072D1F364E0008F11C /* ImagesList */,
@@ -89,6 +95,7 @@
 				7C4054062D21955B00F772BB /* Profile */,
 				7CC97F402D19F9920008F11C /* ImageFeed */,
 				7CC980072D1F364E0008F11C /* ImagesList */,
+				7CE1A5492D5E5D8700DB4E51 /* Auth */,
 			);
 			name = ImageFeed;
 			packageProductDependencies = (
