@@ -21,9 +21,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		7C4054062D21955B00F772BB /* Profile */ = {
+		7C4FAF152D67BBF3007BB670 /* OAuthService */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Profile;
+			path = OAuthService;
+			sourceTree = "<group>";
+		};
+		7C4FAFE82D69053A007BB670 /* Protocols */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		7CC97F402D19F9920008F11C /* ImageFeed */ = {
@@ -34,14 +39,14 @@
 			path = ImageFeed;
 			sourceTree = "<group>";
 		};
-		7CC980072D1F364E0008F11C /* ImagesList */ = {
+		7CC980072D1F364E0008F11C /* Models */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ImagesList;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		7CE1A5492D5E5D8700DB4E51 /* Auth */ = {
+		7CE1A5492D5E5D8700DB4E51 /* ViewControllers */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Auth;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -60,10 +65,11 @@
 		7CC97F352D19F9920008F11C = {
 			isa = PBXGroup;
 			children = (
-				7CE1A5492D5E5D8700DB4E51 /* Auth */,
+				7C4FAFE82D69053A007BB670 /* Protocols */,
+				7C4FAF152D67BBF3007BB670 /* OAuthService */,
+				7CE1A5492D5E5D8700DB4E51 /* ViewControllers */,
 				7CC97F402D19F9920008F11C /* ImageFeed */,
-				7C4054062D21955B00F772BB /* Profile */,
-				7CC980072D1F364E0008F11C /* ImagesList */,
+				7CC980072D1F364E0008F11C /* Models */,
 				7CC97F3F2D19F9920008F11C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,10 +98,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				7C4054062D21955B00F772BB /* Profile */,
+				7C4FAF152D67BBF3007BB670 /* OAuthService */,
+				7C4FAFE82D69053A007BB670 /* Protocols */,
 				7CC97F402D19F9920008F11C /* ImageFeed */,
-				7CC980072D1F364E0008F11C /* ImagesList */,
-				7CE1A5492D5E5D8700DB4E51 /* Auth */,
+				7CC980072D1F364E0008F11C /* Models */,
+				7CE1A5492D5E5D8700DB4E51 /* ViewControllers */,
 			);
 			name = ImageFeed;
 			packageProductDependencies = (

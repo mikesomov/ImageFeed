@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class ImagesListCell: UITableViewCell {
     
     // MARK: - Static properties

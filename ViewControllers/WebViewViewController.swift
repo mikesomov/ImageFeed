@@ -14,12 +14,16 @@ enum WebViewConstants {
 
 final class WebViewViewController: UIViewController {
     
-    // MARK: - @IBOutlet properties
+    // MARK: - @IBOutlets
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var webView: WKWebView!
-    
     @IBOutlet weak var progressView: UIProgressView!
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+        print("Back button tapped")
+    }
     // MARK: - Delegates
     
     weak var delegate: WebViewViewControllerDelegate?
@@ -73,7 +77,7 @@ final class WebViewViewController: UIViewController {
         }
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_url", value: Constants.redirectURI),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
@@ -87,20 +91,6 @@ final class WebViewViewController: UIViewController {
     }
 }
 
-private func code(from navigationAction: WKNavigationAction) -> String? {
-    if
-        let url = navigationAction.request.url,
-        let urlComponents = URLComponents(string: url.absoluteString),
-        urlComponents.path == "/oauth/authorize/native",
-        let items = urlComponents.queryItems,
-        let codeItem = items.first(where: { $0.name == "code" })
-    {
-        return codeItem.value
-    } else {
-        return nil
-    }
-}
-
 // MARK: - Extensions
 
 extension WebViewViewController: WKNavigationDelegate {
@@ -110,17 +100,34 @@ extension WebViewViewController: WKNavigationDelegate {
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
         if let code = code(from: navigationAction) {
+            print("Authorization code received: \(code)")
+            if delegate == nil {
+                print("WebViewController delegate is nil")
+            } else {
+                print("WebViewController delegate is not nil")
+            }
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
         }
     }
-}
-
-// MARK: - Protocols
-
-protocol WebViewViewControllerDelegate: AnyObject {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+    
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if let url = navigationAction.request.url {
+            print("Redirecting to URL: \(url.absoluteString)")
+        }
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code" })
+        {
+            print("Authorization code is: \(codeItem.value ?? "nil")")
+            return codeItem.value
+        } else {
+            return nil
+        }
+    }
 }
