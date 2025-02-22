@@ -294,7 +294,7 @@
                                     <constraint firstAttribute="width" constant="48" id="qCn-DQ-lA9"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="" image="backward"/>
+                                <state key="normal" title="" image="backward_white"/>
                                 <connections>
                                     <action selector="didTouchBackwardButton:" destination="BYk-Fo-HJm" eventType="touchUpInside" id="5Ay-Wd-GLy"/>
                                 </connections>
@@ -378,6 +378,7 @@
         <image name="Vector" width="72.666664123535156" height="75.333335876464844"/>
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="backward" width="24" height="24"/>
+        <image name="backward_white" width="24" height="24"/>
         <image name="like_button_on" width="42" height="42"/>
         <image name="main_active" width="30" height="30"/>
         <image name="profile_not_active" width="30" height="30"/>
