@@ -13,16 +13,14 @@ final class ImagesListViewController: UIViewController {
     
     @IBOutlet private var tableView: UITableView!
     
-    // MARK: - Static properties
+    // MARK: - Private properties
 
     private let currentDate = Date()
     
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    
-    // MARK: - Private vars
-    
+        
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long

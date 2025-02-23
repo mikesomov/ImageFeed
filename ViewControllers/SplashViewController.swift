@@ -8,7 +8,7 @@
 import UIKit
 final class SplashViewController: UIViewController {
     
-    // MARK: - Private constants
+    // MARK: - Private properties
     
     private let storage = OAuth2TokenStorage()
     private let showAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
@@ -47,6 +47,7 @@ final class SplashViewController: UIViewController {
 extension SplashViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showAuthenticationScreenSegueIdentifier {
+            segue.destination.modalPresentationStyle = .fullScreen
             guard let navigationController = segue.destination as? UINavigationController,
                   let authViewController = navigationController.viewControllers.first as? AuthViewController else {
                 assertionFailure("Failed to segue to AuthViewCOntroller")

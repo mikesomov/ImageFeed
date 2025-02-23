@@ -9,7 +9,12 @@ import Foundation
 
 final class OAuth2Service {
     
+    // MARK: - Public properties
+    
     static let shared = OAuth2Service()
+    
+    // MARK: Private properties
+    
     private let baseURL = "https://unsplash.com/oauth/token"
     private let storage = OAuth2TokenStorage()
     private init() {}
@@ -22,6 +27,8 @@ final class OAuth2Service {
         case invalidData
         case decodingFailed(Error)
     }
+    
+    // MARK: - Public methods
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://unsplash.com") else {

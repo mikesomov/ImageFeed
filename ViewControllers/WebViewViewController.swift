@@ -14,7 +14,7 @@ enum WebViewConstants {
 
 final class WebViewViewController: UIViewController {
     
-    // MARK: - @IBOutlets
+    // MARK: - Outlets
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var webView: WKWebView!
@@ -24,9 +24,6 @@ final class WebViewViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         print("Back button tapped")
     }
-    // MARK: - Delegates
-    
-    weak var delegate: WebViewViewControllerDelegate?
     
     // MARK: - Lifecycle
     
@@ -57,11 +54,6 @@ final class WebViewViewController: UIViewController {
         }
     }
     
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAuthView()
@@ -69,6 +61,11 @@ final class WebViewViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    
+    private func updateProgress() {
+        progressView.progress = Float(webView.estimatedProgress)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    }
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
@@ -89,6 +86,10 @@ final class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
+    
+    // MARK: - Delegates
+    
+    weak var delegate: WebViewViewControllerDelegate?
 }
 
 // MARK: - Extensions

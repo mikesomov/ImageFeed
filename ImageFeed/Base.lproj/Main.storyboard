@@ -171,7 +171,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="UD4-vV-rdP" kind="presentation" identifier="ShowWebView" id="9xB-Xp-ABd"/>
+                                    <segue destination="UD4-vV-rdP" kind="show" identifier="ShowWebView" id="9xB-Xp-ABd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -347,7 +347,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="CCw-Mt-MM3" kind="presentation" identifier="showAuthenticationScreen" id="JpT-z2-JYv"/>
+                        <segue destination="CCw-Mt-MM3" kind="show" identifier="showAuthenticationScreen" id="JpT-z2-JYv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CTc-WN-nER" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -357,10 +357,11 @@
         <!--Navigation Controller-->
         <scene sceneID="0Lz-8E-YE9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CCw-Mt-MM3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="CCw-Mt-MM3" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="DrR-se-bUw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y1b-iF-mns">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="-10" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

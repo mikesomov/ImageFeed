@@ -9,18 +9,7 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
-    // MARK: - Vars
-    
-    var image: UIImage? {
-        didSet {
-            guard isViewLoaded, let image else { return }
-            imageView.image = image
-            imageView.frame.size = image.size
-            rescaleAndCenterImageInScrollView(image: image)
-        }
-    }
-    
-    // MARK: - @IBOutlet properties
+    // MARK: - Outlets
     
     @IBAction private func didTapShareButton(_ sender: UIButton) {
         guard let image = image else { return }
@@ -44,6 +33,17 @@ final class SingleImageViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private var imageView: UIImageView!
+    
+    // MARK: - Public properties
+    
+    var image: UIImage? {
+        didSet {
+            guard isViewLoaded, let image else { return }
+            imageView.image = image
+            imageView.frame.size = image.size
+            rescaleAndCenterImageInScrollView(image: image)
+        }
+    }
     
     // MARK: - Lifecycle
     
