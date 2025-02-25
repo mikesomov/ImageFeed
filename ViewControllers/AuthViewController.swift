@@ -13,8 +13,8 @@ final class AuthViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let showWebViewSegueIdentifier = "ShowWebView"
     
-    // MARK: - Outlets
-    
+    // MARK: - @IBOutlets
+
     @IBOutlet weak var enterButton: UIButton!
     
     // MARK: - Overrides
@@ -73,7 +73,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
                         print("PopViewController is being used")
                         nvController.popViewController(animated: true)
                     } else {
-                        print("Dissmiss in being used")
+                        print("Dissmiss is being used")
                         vc.dismiss(animated: true)
                     }
                     if self.delegate == nil {

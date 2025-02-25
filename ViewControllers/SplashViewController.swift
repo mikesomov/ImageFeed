@@ -6,20 +6,14 @@
 //
 
 import UIKit
+
 final class SplashViewController: UIViewController {
     
     // MARK: - Private properties
     
     private let storage = OAuth2TokenStorage()
     private let showAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
-    
-    // MARK: - Overrides
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkAuth()
-    }
-    
+
     // MARK: - Private methods
     
     private func checkAuth() {
@@ -39,6 +33,13 @@ final class SplashViewController: UIViewController {
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
+    }
+    
+    // MARK: - Overrides
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkAuth()
     }
 }
 

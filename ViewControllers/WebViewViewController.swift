@@ -8,14 +8,10 @@
 import UIKit
 @preconcurrency import WebKit
 
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-}
-
 final class WebViewViewController: UIViewController {
     
-    // MARK: - Outlets
-    
+    // MARK: - @IBOutlets
+
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var progressView: UIProgressView!
@@ -25,7 +21,34 @@ final class WebViewViewController: UIViewController {
         print("Back button tapped")
     }
     
-    // MARK: - Lifecycle
+    // MARK: - Private methods
+    
+    private func updateProgress() {
+        progressView.progress = Float(webView.estimatedProgress)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    }
+    
+    private func loadAuthView() {
+        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
+            print("urlComponents error")
+            return
+        }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: Constants.accessScope)
+        ]
+        guard let url = urlComponents.url else {
+            print("url error")
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+    
+    // MARK: - Overrides
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -58,33 +81,6 @@ final class WebViewViewController: UIViewController {
         super.viewDidLoad()
         loadAuthView()
         webView.navigationDelegate = self
-    }
-    
-    // MARK: - Private methods
-    
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-    }
-    
-    private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("urlComponents error")
-            return
-        }
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.accessScope)
-        ]
-        guard let url = urlComponents.url else {
-            print("url error")
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        webView.load(request)
     }
     
     // MARK: - Delegates
@@ -131,4 +127,10 @@ extension WebViewViewController: WKNavigationDelegate {
             return nil
         }
     }
+}
+
+// MARK: - Enums
+
+enum WebViewConstants {
+    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }

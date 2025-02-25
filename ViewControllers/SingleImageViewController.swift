@@ -9,8 +9,8 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
-    // MARK: - Outlets
-    
+    // MARK: - @IBOutlets
+
     @IBAction private func didTapShareButton(_ sender: UIButton) {
         guard let image = image else { return }
         let activityItems: [Any] = [image]
