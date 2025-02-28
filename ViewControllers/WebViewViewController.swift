@@ -94,21 +94,14 @@ extension WebViewViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-    ) {
-        if let code = code(from: navigationAction) {
-            print("Authorization code received: \(code)")
-            if delegate == nil {
-                print("WebViewController delegate is nil")
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let code = code(from: navigationAction) {
+                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+                decisionHandler(.cancel)
             } else {
-                print("WebViewController delegate is not nil")
+                decisionHandler(.allow)
             }
-            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            decisionHandler(.cancel)
-        } else {
-            decisionHandler(.allow)
         }
-    }
     
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if let url = navigationAction.request.url {

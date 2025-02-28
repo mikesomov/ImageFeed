@@ -18,18 +18,14 @@ final class SplashViewController: UIViewController {
     
     private func checkAuth() {
         if storage.token != nil {
-            switchTabBarController()
+            switchToTabBarController()
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
     
-    private func switchTabBarController() {
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Configuration error")
-            return
-        }
-        
+    private func switchToTabBarController() {
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
@@ -65,7 +61,7 @@ extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.dismiss(animated: true) { [weak self] in
-            self?.switchTabBarController()
+            self?.switchToTabBarController()
         }
     }
 }

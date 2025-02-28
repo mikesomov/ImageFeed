@@ -142,7 +142,7 @@
         <scene sceneID="CHZ-2k-Kw8">
             <objects>
                 <viewController id="sPC-5D-1pg" userLabel="AuthViewController" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f1N-tN-nIF" customClass="Auth">
+                    <view key="view" contentMode="scaleToFill" id="f1N-tN-nIF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
