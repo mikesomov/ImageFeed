@@ -16,9 +16,16 @@ final class WebViewViewController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var progressView: UIProgressView!
     
+    // MARK: - Private properties
+    
+    private var estimatedProgressObservation: NSKeyValueObservation?
+    
+    // MARK: - @IBActions
+    
     @IBAction func backButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
         print("Back button tapped")
+        delegate?.webViewControllerDidCancel(self)
     }
     
     // MARK: - Private methods
@@ -48,17 +55,22 @@ final class WebViewViewController: UIViewController {
         webView.load(request)
     }
     
-    // MARK: - Overrides
-    
+    // MARK: - Lifecycle
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
+        
+        webView.navigationDelegate = self
         updateProgress()
+        loadAuthView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

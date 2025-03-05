@@ -10,16 +10,21 @@ import ProgressHUD
 
 final class AuthViewController: UIViewController {
     
-    weak var delegate: AuthViewControllerDelegate?
-    private let oauth2Service = OAuth2Service.shared
-    private let showWebViewSegueIdentifier = "ShowWebView"
-    
     // MARK: - @IBOutlets
 
     @IBOutlet weak var enterButton: UIButton!
     
-    // MARK: - Overrides
+    // MARK: - Public properties
     
+    weak var delegate: AuthViewControllerDelegate?
+    
+    // MARK: - Private properties
+    
+    private let oauth2Service = OAuth2Service.shared
+    private let showWebViewSegueIdentifier = "ShowWebView"
+    
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         enterButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
@@ -103,11 +108,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
         
     private func showAuthErrorAlert() {
         let alert = UIAlertController(
-            title: "Authorization error",
-            message: "Login failed, please try again",
+            title: "Что-то пошло не так",
+            message: "Не удалось войти в систему",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }

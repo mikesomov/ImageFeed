@@ -31,8 +31,8 @@ final class SplashViewController: UIViewController {
         window.rootViewController = tabBarController
     }
     
-    // MARK: - Overrides
-    
+    // MARK: - Lifecycle
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkAuth()

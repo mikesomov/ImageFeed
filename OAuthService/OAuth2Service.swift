@@ -21,21 +21,10 @@ final class OAuth2Service {
     
     private let baseURL = "https://unsplash.com/oauth/token"
     private let storage = OAuth2TokenStorage()
+    
+    // MARK: - Initializers
+
     private init() {}
-    
-    // MARK: - Enums
-    
-    enum OAuthError: Error {
-        case urlEncodingError
-        case serverREsponseError
-        case invalidRequest
-        case noData
-        case networkError(Error)
-        case invalidHttpResponse
-        case invalidStatusCode(Int)
-        case invalidData
-        case decodingFailed(Error)
-    }
     
     // MARK: - Public methods
     
@@ -104,5 +93,19 @@ final class OAuth2Service {
         }
         self.task = task
         task.resume()
+    }
+    
+    // MARK: - Enums
+    
+    enum OAuthError: Error {
+        case urlEncodingError
+        case serverREsponseError
+        case invalidRequest
+        case noData
+        case networkError(Error)
+        case invalidHttpResponse
+        case invalidStatusCode(Int)
+        case invalidData
+        case decodingFailed(Error)
     }
 }
