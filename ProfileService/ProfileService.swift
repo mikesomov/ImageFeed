@@ -7,21 +7,6 @@
 
 import Foundation
 
-// MARK: - Enums
-
-enum ProfileServiceError: Error {
-    case urlEncodingError
-    case serverResponseError(Error)
-    case noDataError
-    case invalidRequest
-    case decodingError
-}
-
-enum HttpMethods: String {
-    case get = "GET"
-    case post = "POST"
-}
-
 final class ProfileService {
     
     // MARK: - Public properties
@@ -125,4 +110,19 @@ final class ProfileService {
         request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         return request
     }
+}
+
+// MARK: - Enums
+
+enum ProfileServiceError: Error {
+    case urlEncodingError
+    case serverResponseError(Error)
+    case noDataError
+    case invalidRequest
+    case decodingError
+}
+
+enum HttpMethods: String {
+    case get = "GET"
+    case post = "POST"
 }

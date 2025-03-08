@@ -23,9 +23,8 @@ final class WebViewViewController: UIViewController {
     // MARK: - @IBActions
     
     @IBAction func backButtonTapped(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
         print("Back button tapped")
-        delegate?.webViewControllerDidCancel(self)
+        delegate?.webViewViewControllerDidCancel(self)
     }
     
     // MARK: - Private methods
@@ -56,10 +55,9 @@ final class WebViewViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         estimatedProgressObservation = webView.observe(
             \.estimatedProgress,
              options: [],
@@ -71,28 +69,6 @@ final class WebViewViewController: UIViewController {
         webView.navigationDelegate = self
         updateProgress()
         loadAuthView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        webView.removeObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            context: nil)
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadAuthView()
-        webView.navigationDelegate = self
     }
     
     // MARK: - Delegates
