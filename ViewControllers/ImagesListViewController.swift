@@ -9,7 +9,7 @@ import UIKit
 
 final class ImagesListViewController: UIViewController {
     
-    // MARK: - @IBOutlet properties
+    // MARK: - @IBOutlets
     
     @IBOutlet private var tableView: UITableView!
     
@@ -29,7 +29,7 @@ final class ImagesListViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)

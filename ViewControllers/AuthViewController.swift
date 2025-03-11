@@ -6,23 +6,29 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class AuthViewController: UIViewController {
     
+    // MARK: - @IBOutlets
+
+    @IBOutlet weak var enterButton: UIButton!
+    
+    // MARK: - Public properties
+    
     weak var delegate: AuthViewControllerDelegate?
+
+    // MARK: - Private properties
+    
     private let oauth2Service = OAuth2Service.shared
     private let showWebViewSegueIdentifier = "ShowWebView"
     
-    // MARK: - Outlets
-    
-    @IBOutlet weak var enterButton: UIButton!
-    
-    // MARK: - Overrides
-    
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        enterButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        
+        enterButton.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 17)
+        enterButton.layer.cornerRadius = 16
         print("AuthViewController instance created: \(self)")
         if delegate == nil {
             print("AuthViewController delegate is nil after returning from WebView")
@@ -59,50 +65,39 @@ final class AuthViewController: UIViewController {
 // MARK: - Extensions
 
 extension AuthViewController: WebViewViewControllerDelegate {
+    
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        print("WebViewController dismissing, code: \(code)")
+        vc.dismiss(animated: true)
         
+        UIBlockingProgressHUD.show()
         oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let token):
-                    print("Token recieved: \(token)")
-                    if let nvController = self.navigationController {
-                        print("PopViewController is being used")
-                        nvController.popViewController(animated: true)
-                    } else {
-                        print("Dissmiss in being used")
-                        vc.dismiss(animated: true)
-                    }
-                    if self.delegate == nil {
-                        print("AuthViewController delegate is nil")
-                    } else {
-                        print("AuthViewController delegate is not nil")
-                        self.delegate?.didAuthenticate(self)
-                    }
-                case .failure(let error):
-                    print("Authorization error: \(error.localizedDescription)")
-                    self.showAuthErrorAlert()
-                }
+            UIBlockingProgressHUD.dismiss()
+            switch result {
+            case .success:
+                delegate?.authViewController(self, didAuthenticateWithCode: code)
+            case .failure:
+                showErrorAlert()
+                break
             }
         }
     }
-        func webViewControllerDidCancel(_ vc: WebViewViewController) {
-            print("User has canceled authorization")
-            print("Dismissing WebView")
-            vc.dismiss(animated: true)
-            self.delegate?.didAuthenticate(self)
-        }
-        
-    private func showAuthErrorAlert() {
+    
+    private func showErrorAlert() {
         let alert = UIAlertController(
-            title: "Authorization error",
-            message: "Login failed, please try again",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            preferredStyle: .alert)
+        let action = UIAlertAction(
+            title: "Oк",
+            style: .default) { _ in
+                alert.dismiss(animated: true)
+            }
+        alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        dismiss(animated: true)
     }
 }

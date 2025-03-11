@@ -9,8 +9,8 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell {
     
-    // MARK: - Outlets
-    
+    // MARK: - @IBOutlets
+
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!

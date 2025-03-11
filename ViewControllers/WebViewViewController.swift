@@ -8,56 +8,23 @@
 import UIKit
 @preconcurrency import WebKit
 
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-}
-
 final class WebViewViewController: UIViewController {
     
-    // MARK: - Outlets
-    
+    // MARK: - @IBOutlets
+
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var progressView: UIProgressView!
     
+    // MARK: - Private properties
+    
+    private var estimatedProgressObservation: NSKeyValueObservation?
+    
+    // MARK: - @IBActions
+    
     @IBAction func backButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
         print("Back button tapped")
-    }
-    
-    // MARK: - Lifecycle
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
-        updateProgress()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        webView.removeObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            context: nil)
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadAuthView()
-        webView.navigationDelegate = self
+        delegate?.webViewViewControllerDidCancel(self)
     }
     
     // MARK: - Private methods
@@ -87,6 +54,23 @@ final class WebViewViewController: UIViewController {
         webView.load(request)
     }
     
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
+        
+        webView.navigationDelegate = self
+        updateProgress()
+        loadAuthView()
+    }
+    
     // MARK: - Delegates
     
     weak var delegate: WebViewViewControllerDelegate?
@@ -98,21 +82,14 @@ extension WebViewViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-    ) {
-        if let code = code(from: navigationAction) {
-            print("Authorization code received: \(code)")
-            if delegate == nil {
-                print("WebViewController delegate is nil")
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let code = code(from: navigationAction) {
+                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+                decisionHandler(.cancel)
             } else {
-                print("WebViewController delegate is not nil")
+                decisionHandler(.allow)
             }
-            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            decisionHandler(.cancel)
-        } else {
-            decisionHandler(.allow)
         }
-    }
     
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if let url = navigationAction.request.url {
@@ -131,4 +108,10 @@ extension WebViewViewController: WKNavigationDelegate {
             return nil
         }
     }
+}
+
+// MARK: - Enums
+
+enum WebViewConstants {
+    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }

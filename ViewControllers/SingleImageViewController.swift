@@ -9,8 +9,24 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
-    // MARK: - Outlets
+    // MARK: - @IBOutlets
+
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private var imageView: UIImageView!
     
+    // MARK: - Public properties
+    
+    var image: UIImage? {
+        didSet {
+            guard isViewLoaded, let image else { return }
+            imageView.image = image
+            imageView.frame.size = image.size
+            rescaleAndCenterImageInScrollView(image: image)
+        }
+    }
+    
+    // MARK: - @IBActions
+
     @IBAction private func didTapShareButton(_ sender: UIButton) {
         guard let image = image else { return }
         let activityItems: [Any] = [image]
@@ -29,20 +45,6 @@ final class SingleImageViewController: UIViewController {
     
     @IBAction private func didTouchBackwardButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet private var imageView: UIImageView!
-    
-    // MARK: - Public properties
-    
-    var image: UIImage? {
-        didSet {
-            guard isViewLoaded, let image else { return }
-            imageView.image = image
-            imageView.frame.size = image.size
-            rescaleAndCenterImageInScrollView(image: image)
-        }
     }
     
     // MARK: - Lifecycle
