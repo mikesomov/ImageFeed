@@ -14,6 +14,8 @@ final class ProfileService {
     var token: String?
     var username: String?
     static let shared = ProfileService()
+    private(set) var profile: Profile? = nil
+
     
     // MARK: - Private properties
     
@@ -56,6 +58,10 @@ final class ProfileService {
     }
     
     // MARK: - Public methods
+    
+    func cleanProfileData() {
+        profile = nil
+    }
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
