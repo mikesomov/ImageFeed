@@ -8,6 +8,13 @@
 import UIKit
 @preconcurrency import WebKit
 
+// MARK: - Protocols
+
+protocol WebViewViewControllerDelegate: AnyObject {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+}
+
 final class WebViewViewController: UIViewController {
     
     // MARK: - @IBOutlets
@@ -24,7 +31,12 @@ final class WebViewViewController: UIViewController {
     
     @IBAction func backButtonTapped(_ sender: Any) {
         print("Back button tapped")
-        delegate?.webViewViewControllerDidCancel(self)
+            
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                delegate?.webViewViewControllerDidCancel(self)
+            }
     }
     
     // MARK: - Private methods

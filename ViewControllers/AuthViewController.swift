@@ -8,6 +8,12 @@
 import UIKit
 import ProgressHUD
 
+// MARK: - Protocols
+
+protocol AuthViewControllerDelegate: AnyObject {
+    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
+}
+
 final class AuthViewController: UIViewController {
     
     // MARK: - @IBOutlets

@@ -44,6 +44,10 @@ final class ProfileImageService {
     
     // MARK: Public methods
     
+    func cleanProfilePhoto() {
+        imageUrl = nil
+    }
+    
     func fetchProfileImage(_ token: String, completion: @escaping (Result<ProfileImage, Error>) -> Void) {
         assert(Thread.isMainThread)
         if task != nil {

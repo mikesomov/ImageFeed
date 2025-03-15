@@ -67,6 +67,9 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = .yBlack
         setupConstraints()
         fetchProfileData()
+        observerProfileImageChanges()
+        
+        logoutButton.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
     }
     
     deinit {
@@ -75,10 +78,10 @@ final class ProfileViewController: UIViewController {
         }
     }
     
-    // MARK: - IBActions
+    // MARK: - Objective-C
     
-    @IBAction private func didTapLogoutButton(_ sender: Any) {
-        //TODO setup logout
+    @objc private func didTapLogoutButton() {
+        showAlertForExit()
     }
     
     // MARK: - Private methods
@@ -106,6 +109,29 @@ final class ProfileViewController: UIViewController {
             logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24)
         ])
+    }
+    
+    private func showAlertForExit() {
+        let alert = UIAlertController(
+                title: "Пока, пока!",
+                message: "Уверены, что хотите выйти?",
+                preferredStyle: .alert
+            )
+            
+            let yesButton = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+                self?.performLogout()
+            }
+            
+            let noButton = UIAlertAction(title: "Нет", style: .default, handler: nil)
+            
+            alert.addAction(yesButton)
+            alert.addAction(noButton)
+            
+            present(alert, animated: true, completion: nil)
+    }
+    
+    private func performLogout() {
+        ProfileLogoutService.shared.logout()
     }
     
     private func fetchProfileData() {
